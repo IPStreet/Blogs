@@ -1,0 +1,16 @@
+
+#Delete all nodes and relationships
+MATCH (n)
+DETACH DELETE n
+
+#return all nodes and relationships
+MATCH ()-[r]->() RETURN r
+
+#return all patents Fred Brown has invented
+MATCH (a:Person_Node {full_name: 'Brown, Fred A.'}) -[r]-> (b:Patent_Node)
+RETURN r
+
+#return all patents Fred Brown has invented and his coinventor
+MATCH (a:Person_Node {full_name: 'Brown, Fred A.'}) -[i]-> (b:Patent_Node)
+MATCH (b:Patent_Node) <-[j]- (c:Person_Node)
+RETURN i,j
